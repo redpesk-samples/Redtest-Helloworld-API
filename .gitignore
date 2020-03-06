@@ -1,0 +1,32 @@
+# VSCode configuration directory
+.vscode/
+
+# Pre-compiled python directory
+__pycache__/
+
+# Cache directory
+.cache/
+
+# Build documentation directory
+doc/build/
+
+# Ignore the pyc files
+*.pyc
+
+# Ignore files use for python virtual environment
+bin/
+lib/
+lib64
+pyvenv.cfg
+share/
+
+# Ignore the log files of the app
+*.log*
+
+# Setuptools distribution folder.
+/dist/
+
+# Python egg metadata, regenerated from source files by setuptools.
+/*.egg-info
+.eggs/
+

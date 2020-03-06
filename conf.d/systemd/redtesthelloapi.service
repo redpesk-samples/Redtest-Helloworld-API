@@ -1,0 +1,12 @@
+[Unit]
+Description=Python API project that can be used as an example on how to implement Redtests in a project
+Documentation=http://git.ovh.iot/redpesk/redtest-helloword-api
+After=network.target
+
+[Service]
+ExecStart=/usr/bin/redtesthelloworldd
+Restart=always
+RestartSec=1s
+
+[Install]
+WantedBy=multi-user.target

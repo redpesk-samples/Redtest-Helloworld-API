@@ -1,0 +1,12 @@
+#!/usr/bin/env python3
+
+from aiohttp import web
+from redtest_helloworld_api.rtest_hello_api_main import main_init_app
+
+if __name__ == "__main__":
+
+    redtest_hello_app = main_init_app()
+
+    if redtest_hello_app is not None:
+        # Run the HTTP API
+        web.run_app(redtest_hello_app, port=8080)
