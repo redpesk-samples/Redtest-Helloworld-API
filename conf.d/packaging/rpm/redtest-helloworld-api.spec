@@ -1,5 +1,5 @@
 #
-# spec file for package redtunamagic-ship
+# spec file for package redtest-helloworld-api
 #
 
 Name:           redtest-helloworld-api
