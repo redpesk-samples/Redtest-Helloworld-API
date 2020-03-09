@@ -17,7 +17,10 @@ mkdir -p $LOGS_PATH
 rm -f "$LOGS_PATH/*.tap"
 
 # Run the tests and save the results in a log file
-pytest --tap-stream "${FULL_TEST_PATH}/" | tee "$LOGS_PATH/tests_helloworld.tap"
+pytest-3 --tap-stream "${FULL_TEST_PATH}/" | tee "$LOGS_PATH/tests_helloworld.tap"
+
+# Stop the helloworld service
+systemctl stop redtesthelloapi.service
 
 # End of the test
 exit 0
