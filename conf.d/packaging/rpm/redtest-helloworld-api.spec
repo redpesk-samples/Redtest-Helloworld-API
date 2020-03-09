@@ -13,7 +13,7 @@ Vendor:         Armand Bénéteau <armand.beneteau@iot.bzh>
 Url:            http://git.ovh.iot/redpesk/redtest-helloword-api
 Source:         %{name}-%{version}.tar.bz2
 
-BuildRequires:  python3
+BuildRequires:  python3-devel
 BuildRequires:  python3-rpm-macros
 BuildRequires:  python3-setuptools
 BuildRequires:  systemd
@@ -26,6 +26,16 @@ BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-buildroot
 %description
 Python API project that can be used as an example on how to implement Redtests in a project
 
+%package redtest
+Summary:        Redtest subpackage of the helloworld API
+Requires:       python3-requests
+Requires:       python3-tap.py
+Requires:       pytest
+Requires:       python3dist(pytest-tap)
+
+%description redtest
+Tests subpackage for the helloworld API package. The tests results generated follows the TAP format.
+
 %prep
 %setup -q
 
@@ -36,6 +46,8 @@ python3 setup.py build
 python3 setup.py install --single-version-externally-managed -O1 --root=$RPM_BUILD_ROOT --record=INSTALLED_FILES
 mkdir -p %{buildroot}%{_unitdir}/
 cp conf.d/systemd/redtesthelloapi.service %{buildroot}%{_unitdir}/
+mkdir -p %{buildroot}%{_libdir}/%{name}-redtest/redtest
+cp -a redtest/. %{buildroot}%{_libdir}/%{name}-redtest/redtest/
 
 %post
 %systemd_post redtesthelloapi.service
@@ -57,5 +69,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_unitdir}/redtesthelloapi.service
 %{python3_sitelib}/redtest_helloworld_api
 %{python3_sitelib}/redtest_helloworld_api-*.egg-info
+
+%files redtest
+%defattr(-,root,root)
+%{_libdir}/%{name}-redtest/redtest/*
 
 %changelog
