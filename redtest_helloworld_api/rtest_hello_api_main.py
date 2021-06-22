@@ -27,6 +27,7 @@ from aiohttp import web
 import asyncio
 import os
 import signal
+import sys
 
 # Import constants
 from redtest_helloworld_api.rtest_hello_shared_constants import *
@@ -179,8 +180,12 @@ async def stop_RTest_hello_API():
     and all the tasks needed to be stopped properly.
     """
     # Stop the other tasks badly managed elsewhere
-    # Get all the tasks running
-    all_tasks = asyncio.Task.all_tasks()
+    # Get all the tasks running (according to python version)
+    if sys.version_info >= (3, 7):
+        all_tasks = asyncio.all_tasks()
+    else:
+        all_tasks = asyncio.Task.all_tasks()
+
     for task in all_tasks:
         # Get the name of each coroutine
         coroname = task._coro.__name__

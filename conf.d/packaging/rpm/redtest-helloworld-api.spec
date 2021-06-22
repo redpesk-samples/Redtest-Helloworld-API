@@ -46,8 +46,8 @@ python3 setup.py build
 python3 setup.py install --single-version-externally-managed -O1 --root=$RPM_BUILD_ROOT --record=INSTALLED_FILES
 mkdir -p %{buildroot}%{_unitdir}/
 cp conf.d/systemd/redtesthelloapi.service %{buildroot}%{_unitdir}/
-mkdir -p %{buildroot}%{_prefix}/lib/%{name}-redtest/redtest
-cp -a redtest/. %{buildroot}%{_prefix}/lib/%{name}-redtest/redtest/
+mkdir -p %{buildroot}%{_libexecdir}/redtest/%{name}/
+cp -a redtest/. %{buildroot}%{_libexecdir}/redtest/%{name}/
 
 %post
 %systemd_post redtesthelloapi.service
@@ -72,6 +72,6 @@ rm -rf $RPM_BUILD_ROOT
 
 %files redtest
 %defattr(-,root,root)
-%{_prefix}/lib/%{name}-redtest/redtest/*
+%{_libexecdir}/redtest/%{name}/*
 
 %changelog
