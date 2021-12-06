@@ -1,7 +1,8 @@
 #!/bin/bash
 
 # Path where the script is installed
-FULL_TEST_PATH="/var/log/redtest/redtest-helloworld-api/"
+FULL_TEST_PATH="/usr/libexec/redtest/redtest-helloworld-api/"
+FULL_LOGS_PATH="/var/log/redtest/redtest-helloworld-api/"
 
 # Start the helloworld service
 systemctl start redtesthelloapi.service
@@ -10,13 +11,13 @@ systemctl start redtesthelloapi.service
 export PYTHONUNBUFFERED=1
 
 # First create the logs directory
-mkdir -p $FULL_TEST_PATH
+mkdir -p $FULL_LOGS_PATH
 
 # Remove the previous log file if it exists
-rm -f "$FULL_TEST_PATH/*.tap"
+rm -f "$FULL_LOGS_PATH/*.tap"
 
 # Run the tests and save the results in a log file
-pytest-3 --tap-stream "${FULL_TEST_PATH}" | tee "$FULL_TEST_PATH/tests_helloworld.tap"
+pytest-3 --tap-stream "${FULL_TEST_PATH}" | tee "$FULL_LOGS_PATH/tests_helloworld.tap"
 
 # Stop the helloworld service
 systemctl stop redtesthelloapi.service
