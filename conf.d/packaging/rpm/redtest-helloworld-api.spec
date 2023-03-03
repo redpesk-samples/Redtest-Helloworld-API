@@ -28,6 +28,7 @@ Python API project that can be used as an example on how to implement Redtests i
 
 %package redtest
 Summary:        Redtest subpackage of the helloworld API
+Requires:       %{name} = %{version}
 Requires:       python3-requests
 Requires:       python3-tap.py
 Requires:       python3-pytest
