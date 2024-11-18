@@ -22,13 +22,9 @@ Test case for helloworld API
     limitations under the License.*
 """
 # Imports
-import os
-import sys
 import unittest
 import requests
 import time
-
-from tap import TAPTestRunner
 
 from test_constants import *
 
@@ -158,37 +154,3 @@ class TestHelloworldAPI(unittest.TestCase):
         self.assertTrue("friend" in answer_data[JSON_MSG_KEY])
 
         time.sleep(1)
-
-
-# if __name__ == "__main__":
-#     # Initialize what is needed on the unittest side
-#     loader = unittest.TestLoader()
-#     tests_to_run = loader.loadTestsFromTestCase(TestHelloworldAPI)
-#     test_nb = tests_to_run.countTestCases()
-    
-#     # Get the directory where the logs need to be stored
-#     logs_dir = os.path.dirname(os.path.abspath(__file__))
-#     logs_dir += "/logs"
-
-#     # Checks if the directory exists and delete it if not
-#     if not os.path.exists(logs_dir):
-#         os.makedirs(logs_dir)
-    
-#     # Create the TAP test runner
-#     runner = TAPTestRunner()
-    
-#     # Set the output of the runner on the stdoutput
-#     runner.set_stream(False)
-
-#     # Set the log file to use for TAP
-#     runner.set_outdir(logs_dir)
-
-#     # The tappy library does not put the number of tests at the beginning of the output...
-#     # Set it manually but post an issue about it: TODO
-#     # print("1.." + str(test_nb))
-    
-#     # Run the tests
-#     result = runner.run(tests_to_run)
-    
-#     # Exit
-#     sys.exit(0)
