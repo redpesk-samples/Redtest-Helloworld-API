@@ -33,6 +33,7 @@ Requires:       python3-requests
 Requires:       python3-tap.py
 Requires:       python3-pytest
 Requires:       python3-pytest-tap
+Requires:       python3-coverage
 
 %description redtest
 Tests subpackage for the helloworld API package. The tests results generated follows the TAP format.

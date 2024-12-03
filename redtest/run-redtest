@@ -4,9 +4,6 @@
 FULL_TEST_PATH="/usr/libexec/redtest/redtest-helloworld-api/"
 FULL_LOGS_PATH="/var/log/redtest/redtest-helloworld-api/"
 
-# Start the helloworld service
-systemctl start redtesthelloapi.service
-
 # Export environment variable in order to ask python to not buffer the lines
 export PYTHONUNBUFFERED=1
 
@@ -16,11 +13,30 @@ mkdir -p $FULL_LOGS_PATH
 # Remove the previous log file if it exists
 rm -f "$FULL_LOGS_PATH/*.tap"
 
-# Run the tests and save the results in a log file
-pytest-3 --tap-stream "${FULL_TEST_PATH}" | tee "$FULL_LOGS_PATH/tests_helloworld.tap"
+# Run the tests, save the results in a log file, and save the coverage data
+coverage-3 run --source=redtest_helloworld_api \
+            -m pytest \
+            --tap-stream /usr/libexec/redtest/redtest-helloworld-api/test_helloworld_cov.py \
+            -o cache_dir=/tmp \
+            --junit-xml=result.xml | tee "$FULL_LOGS_PATH/tests_helloworld.tap"
 
-# Stop the helloworld service
-systemctl stop redtesthelloapi.service
+# Echo the coverage in the logs
+echo "#### TEST COVERAGE ####"
+coverage-3 report
+
+# Create the html coverage report
+coverage-3 html -d ./html-coverage
+
+# Create the xml coverage report
+coverage-3 xml
+
+# Create an archive from the HTML report directory
+tar -czf html-coverage.tar.gz html-coverage
+
+# Move the different coverage reports to the logs directory
+mv coverage.xml $FULL_LOGS_PATH/
+mv result.xml $FULL_LOGS_PATH/
+mv html-coverage.tar.gz $FULL_LOGS_PATH/
 
 # End of the test
 exit 0
