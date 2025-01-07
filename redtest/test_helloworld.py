@@ -6,7 +6,7 @@ Test case for helloworld API
 *Date: 06/03/2020*
 
 *License:*
-    *Copyright (C) 2020 "IoT.bzh"*
+    *Copyright (C) 2020-2025 IoT.bzh Company*
 
     *Licensed under the Apache License, Version 2.0 (the "License");\
     you may not use this file except in compliance with the License.\

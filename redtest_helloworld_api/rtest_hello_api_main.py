@@ -6,7 +6,7 @@ Main file used to run the Redtest Helloworld API.
 *Date: 06/03/2020*
 
 *License:*
-    *Copyright (C) 2019 "IoT.bzh"*
+    *Copyright (C) 2019-2025 IoT.bzh Company*
 
     *Licensed under the Apache License, Version 2.0 (the "License");\
     you may not use this file except in compliance with the License.\
